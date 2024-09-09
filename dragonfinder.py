@@ -80,9 +80,9 @@ def update_timers():
 
 def delete_item():
     global sort_needed
-    if len(xcoords) > 0:  # Ensure there's at least one item to delete
-        # Delete the item at the end of the list (last index)
-        index = len(xcoords) - 1
+    selected_index = listbox.curselection()
+    if selected_index:
+        index = selected_index[0]
         del xcoords[index]
         del ycoords[index]
         del times[index]
@@ -100,10 +100,9 @@ style.configure("TLabel", font=("Helvetica", 12))
 label = ttk.Label(root, text="Fortresses:", background="#f0f0f0")
 label.pack(pady=(0, 0))
 
-# Create a listbox to display the fortresses with no selection capability
-listbox = tk.Listbox(root, width=50, height=20, relief="flat", font=("Courier", 10),
-                     bg="#ffffff", bd=0, highlightthickness=0, selectbackground="#a0c4ff", selectforeground="black",
-                     selectmode=tk.NONE)  # Disable selection
+# Create a listbox to display the fortresses
+listbox = tk.Listbox(root, width=50, height=17, relief="flat", font=("Courier", 10),
+                     bg="#ffffff", bd=0, highlightthickness=0, selectbackground="#a0c4ff", selectforeground="black")
 listbox.pack(pady=(10, 10), fill="x")
 
 # Create an entry widget for input with a modern look
@@ -116,7 +115,7 @@ button.pack(pady=(0, 10), fill="x")
 
 style.configure("RedButton.TButton", background="#f8d7da", foreground="black")
 
-# Create a button to delete the item at the top
+# Create a button to delete the selected item
 #delete_button = ttk.Button(root, text="Delete Top", command=delete_item, style="RedButton.TButton")
 #delete_button.pack(pady=(0, 10), fill="x")
 
